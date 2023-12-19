@@ -9,7 +9,18 @@
 #include "usart.h"
 
 struct PeripheralAllocation {
+    GPIO_TypeDef* GPIO_PORT[MAL::Peripheral_GPIO::End_G - 1];
+    uint16_t GPIO_PIN[MAL::Peripheral_GPIO::End_G - 1];
+    UART_HandleTypeDef* UART[MAL::Peripheral_UART::End_U - 1];
+    DMA_HandleTypeDef* UART_DMA[MAL::Peripheral_UART::End_U - 1];
 };
+
+static PeripheralAllocation PAL;
+
+stm32f446AbstractionLayer::stm32f446AbstractionLayer() {
+    PAL.UART[MAL::Peripheral_UART::Cam] = &huart6;
+    PAL.UART[MAL::Peripheral_UART::Debug] = &huart2;
+}
 
 void stm32f446AbstractionLayer::init() {
     _initADC();
@@ -32,7 +43,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle) {
 }
 
 // PWM
-virtual void pwmSetDuty(Peripheral_PWM p, float duty) {
+void stm32f446AbstractionLayer::pwmSetDuty(Peripheral_PWM p, float duty) {
 }
 
 // GPIO

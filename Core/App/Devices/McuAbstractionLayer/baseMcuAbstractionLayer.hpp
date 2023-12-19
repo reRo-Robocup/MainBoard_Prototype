@@ -17,7 +17,7 @@ class baseMcuAbstractionLayer {
         BatteryVoltage,
         BallCatchA,
         BallCatchB,
-
+        End_A,
     };
 
     enum Peripheral_PWM {
@@ -25,6 +25,7 @@ class baseMcuAbstractionLayer {
         M2,
         M3,
         M4,
+        End_P
     };
 
     enum Peripheral_GPIO {
@@ -36,11 +37,13 @@ class baseMcuAbstractionLayer {
         MuxB_Sig1,
         MuxB_Sig2,
         MuxB_Sig3,
+        End_G
     };
 
     enum Peripheral_UART {
         Cam,
         Debug,
+        End_U
     };
 
     virtual void init(void) = 0;
